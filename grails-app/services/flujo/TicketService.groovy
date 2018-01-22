@@ -10,8 +10,9 @@ class TicketService {
     
     def obtenerTickets(def tipo , def usuario) {
         def datos = []
+        def consulta
         if (tipo == 'SinAsignar'){
-            def consulta = Ticket.executeQuery("SELECT t FROM Ticket t WHERE t.estatus = :estatus AND t.registradoPor = :user ",[estatus: Estatus.get(1 as long) , user: Usuario.findByUsername(usuario) ])
+            consulta = Ticket.executeQuery("SELECT t FROM Ticket t WHERE t.estatus = :estatus AND t.registradoPor = :user ",[estatus: Estatus.get(1 as long) , user: Usuario.findByUsername(usuario) ])
             consulta.each{
                 def ticket = [:]
                 ticket.id = it.id

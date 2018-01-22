@@ -17,7 +17,7 @@
                                     <li><g:link class="asignar" action="asignar"><g:message code="Asignar" args="" /></g:link></li>
                                 </sec:ifAnyGranted>          
                                 <sec:ifAnyGranted roles='ROLE_USER'>
-                                    <li><g:link class="asignados" action="ticketsAsignados"><g:message code="Asigandos" args="" /></g:link></li>
+                                    <li><g:link class="asignados" action="listarAsignados"><g:message code="Asigandos" args="" /></g:link></li>
                                 </sec:ifAnyGranted>      
 			</ul>
 		</div>
