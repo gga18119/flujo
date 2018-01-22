@@ -1,0 +1,26 @@
+<plugin name='cookie-session' version='2.0.16' grailsVersion='1.2.4 &gt; *'>
+  <author>Ben Lucchesi</author>
+  <authorEmail>benlucchesi@gmail.com</authorEmail>
+  <title>Cookie Session Plugin</title>
+  <description>The Cookie Session plugin enables grails applications to store session data in http cookies between requests instead of in memory on the server. This allows application deployments to be more stateless which supports simplified scaling architectures and fault tolerance.</description>
+  <documentation>http://github.com/benlucchesi/grails-cookie-session-v2</documentation>
+  <type>CookieSessionGrailsPlugin</type>
+  <resources />
+  <repositories>
+    <repository name='grailsCentral' url='http://grails.org/plugins' />
+    <repository name='http://repo.grails.org/grails/core' url='http://repo.grails.org/grails/core/' />
+    <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
+  </repositories>
+  <dependencies>
+    <compile>
+      <dependency group='de.javakaffee' name='kryo-serializers' version='0.26' />
+    </compile>
+  </dependencies>
+  <plugins>
+    <compile>
+      <plugin group='org.grails.plugins' name='webxml' version='1.4.1' />
+    </compile>
+  </plugins>
+  <runtimePluginRequirements />
+  <behavior />
+</plugin>
