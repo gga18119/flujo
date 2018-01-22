@@ -21,7 +21,17 @@ class TicketService {
             }
             return datos
         }else if(tipo == "Asignados"){            
-            printl "entro 29"
+            consulta = Ticket.executeQuery("SELECT t FROM Ticket t WHERE t.estatus = :estatus AND t.asignadoA = :user ",[estatus: Estatus.get(2 as long) , user: Usuario.findByUsername(usuario) ])
+            consulta.each{
+                def ticket = [:]
+                ticket.id = it.id
+                ticket.folio = it.folio
+                ticket.descripcion = it.descripcion
+                ticket.fechaAsignacion = it.fechaAsignacion
+                ticket.registradoPor = it.registradoPor
+                datos << ticket
+            }
+            return datos
         }
     }
     def obtenerUsuarios(def usuario){
@@ -34,6 +44,16 @@ class TicketService {
             datos << user
         }
         return datos 
+    }
+    
+     def guardarFlujo(def usuario , def estatus , def folio){
+        
+        def flujo = new Flujo ()
+        flujo.usuarioMovimiento = Usuario.findByUsername(usuario)
+        flujo.ticket = folio
+        flujo.estatus = Estatus.get(estatus as long)
+        flujo.save()
+        println "46 ::::::::  " + flujo
     }
     
 }

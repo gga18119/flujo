@@ -10,13 +10,18 @@
 	<body>
 		<a href="#list-ticket" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-                                <li><g:link class="asignar" action="asignar"><g:message code="Asignar" args="" /></g:link></li>
+			<ul>    
+                                <sec:ifAnyGranted roles='ROLE_ADMIN'>
+                                    <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+                                    <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                                    <li><g:link class="asignar" action="asignar"><g:message code="Asignar" args="" /></g:link></li>
+                                </sec:ifAnyGranted>          
+                                <sec:ifAnyGranted roles='ROLE_USER'>
+                                    <li><g:link class="asignados" action="asignar"><g:message code="Asigandos" args="" /></g:link></li>
+                                </sec:ifAnyGranted>      
 			</ul>
 		</div>
-                
+                <sec:ifAnyGranted roles='ROLE_ADMIN'>
 		<div id="list-ticket" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -66,6 +71,6 @@
 			</div>
                         
 		</div>
-                
+            </sec:ifAnyGranted>          
 	</body>
 </html>

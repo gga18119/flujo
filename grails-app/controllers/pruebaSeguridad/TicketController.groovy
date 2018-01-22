@@ -40,9 +40,11 @@ class TicketController {
             respond ticketInstance.errors, view:'create'
             return
         }
-        ticketInstance.registradoPor = Usuario.findByUsername(session.usuario)
+        def us = springSecurityService.currentUser.username
+        ticketInstance.registradoPor = Usuario.findByUsername(us)
         ticketInstance.estatus = Estatus.get(1 as long)
         ticketInstance.save flush:true
+        def inf = ticketService.guardarFlujo(us,1,ticketInstance)
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'ticket.label', default: 'Ticket'), ticketInstance.id])
@@ -97,12 +99,6 @@ class TicketController {
             '*'{ render status: NO_CONTENT }
         }
     }
-    def asignar (){
-        def data = [:]
-        data.tickets = ticketService.obtenerTickets("SinAsignar" , springSecurityService.currentUser.username)
-        data.usuarios = ticketService.obtenerUsuarios( springSecurityService.currentUser.username)
-//      
-    }
     protected void notFound() {
         request.withFormat {
             form multipartForm {
@@ -112,6 +108,34 @@ class TicketController {
             '*'{ render status: NOT_FOUND }
         }
     }
+    def asignar (){
+        def data = [:]
+        data.tickets = ticketService.obtenerTickets("SinAsignar" , springSecurityService.currentUser.username)
+        data.usuarios = ticketService.obtenerUsuarios( springSecurityService.currentUser.username)
+        println "D A T A :::::::::::::::::::::::::::"+data
+        render (view:"asignar", model: [detalle: data])
+        
+    }
+     def asignarTicket (){
+        def ticket = Ticket.get(params.ticket as long)
+        ticket.asignadoA = Usuario.get(params.asignadoA as long )
+        ticket.estatus = Estatus.get(2 as long)
+        ticket.fechaAsignacion = new Date()
+        ticket.save()
+        def gf = ticketService.guardarFlujo(springSecurityService.currentUser.username,2,ticket)
+    }
+    
+   def listarAsignados(){
+       def tickets = ticketService.obtenerTickets("Asignados",springSecurityService.currentUser.username)
+       println "/////////////////////////////   " + tickets 
+       render (view:"listarAsignados", model: [asignados: tickets])
+    }
+    
+    def detalleRevisar(){
+        def respuesta = Ticket.get(params.id as long )
+        render (view:"detalleRevisar", model: [detalle: respuesta])
+    }
+   
     
     def printReport(){
      println params

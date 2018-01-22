@@ -3,7 +3,7 @@ dataSource {
     jmxExport = true
     driverClassName = "org.postgresql.Driver"
     username = "postgres"
-    password = "postgres123"
+    password = "gga1811*"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -19,19 +19,19 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:postgresql://localhost:5432/base"
+            url = "jdbc:postgresql://localhost:5432/fl"
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:postgresql://localhost:5432/base"
+            url = "jdbc:postgresql://localhost:5432/fl"
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:postgresql://localhost:5432/base"
+            url = "jdbc:postgresql://localhost:5432/fl"
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true
