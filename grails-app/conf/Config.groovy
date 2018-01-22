@@ -88,7 +88,7 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
-        jasper.dir.reports = '/home/estadias02/Proyectos/flujo/web-app/reports'
+        jasper.dir.reports = '/home/nsanchez/proyectos/flujo/web-app/reports'
     }
     production {
         grails.logging.jul.usebridge = false

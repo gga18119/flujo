@@ -60,7 +60,7 @@
 				</g:each>
 				</tbody>
 			</table>
-                        <g:jasperReport jasper="listarTickets" format="PDF" name="All T" />
+                       
 			<div class="pagination">
 				<g:paginate total="${ticketInstanceCount ?: 0}" />
 			</div>

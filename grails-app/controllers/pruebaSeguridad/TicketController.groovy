@@ -113,7 +113,22 @@ class TicketController {
         }
     }
     
-    def reporte (){
-        
+    def printReport(){
+     println params
+     def mapa = []
+     def datos= Ticket.get(params.idTicket as long)
+     def respuesta = [:]
+     respuesta.folio=datos.folio
+     respuesta.estatus=datos.estatus
+     respuesta.descripcion= datos.descripcion
+     respuesta.fechaRegistro=datos.fechaRegistro
+     respuesta.registradoPor=datos.registradoPor.username
+     mapa<<respuesta
+     println mapa
+     params._format="PDF"
+     
+      
+       chain(controller:"jasper",action:"index",model:[data:mapa], params :params)
+     
     }
 }

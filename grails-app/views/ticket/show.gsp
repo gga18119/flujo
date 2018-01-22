@@ -95,17 +95,18 @@
 					<g:link class="edit" action="edit" resource="${ticketInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
                                    
                                         <g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                         <g:jasperForm 
-                                
-                                controller="ticket"
-                                action="reporte"
-                                jasper="ticketsList" 
-                                name="Registro">
-                                <input type="hidden" name="idticket" value='${ticketInstance.id}'/> 
-                                <g:jasperButton format="pdf"  controller="ticket"  action="reporte" jasper="ticketsList" text="IMPRIMIR"  />
-                            </g:jasperForm>
+                       
                                 </fieldset>
 			</g:form>
+                         <g:jasperForm 
+                               controller="ticket"
+                                action="printReport"
+                                jasper="ticket_1" 
+                                name="ticket_1">
+                                <input type="hidden" name="idTicket" value='${ticketInstance?.id}'/> 
+                                <g:jasperButton format="pdf" jasper="ticket_1" text="IMPRIME"  />
+                            </g:jasperForm>
+                       
                         </div>
                      </sec:ifAnyGranted>    
 		</div>
